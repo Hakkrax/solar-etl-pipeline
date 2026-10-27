@@ -7,7 +7,7 @@ An automated Python ETL pipeline that turns messy public solar-panel monitoring
 data into a clean, trusted, hourly SQL dataset joined with weather, with a
 named data-quality rule for every fix it makes.
 
-- **Sources:** [NREL PVDAQ](https://doi.org/10.25984/1846021) 15-minute
+- **Sources:** [NREL PVDAQ](https://doi.org/10.25984/1846021) 5- and 15-minute
   monitoring files from a public S3 bucket, and the
   [Open-Meteo](https://open-meteo.com/) historical weather API. Both are free,
   keyless and CC BY 4.0.
@@ -177,4 +177,5 @@ docs/DESIGN.md     decisions and evidence
   Initiative, CC BY 4.0. https://doi.org/10.25984/1846021
 - Open-Meteo historical weather API (ERA5-based reanalysis), CC BY 4.0.
 
-MIT licence for the code.
+MIT licence for the code. The data is downloaded at run time, is not stored in
+this repository and is not covered by the code licence.

@@ -19,12 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-The data this code downloads is NOT covered by this licence and is not stored
-in this repository:
-
-- NREL PV Data Acquisition (PVDAQ), via the Open Energy Data Initiative,
-  CC BY 4.0. https://doi.org/10.25984/1846021
-- Open-Meteo historical weather API, CC BY 4.0. https://open-meteo.com/
