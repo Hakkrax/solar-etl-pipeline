@@ -1,0 +1,49 @@
+name: scheduled canary run
+
+# PVDAQ is a historical archive, so there is no "new data" to collect each week.
+# This job instead re-runs a fixed window end to end against the real S3 bucket
+# and weather API, twice, to catch source changes (moved files, renamed
+# columns, unit changes, outages) and to prove the load is idempotent.
+# The quality report is uploaded as a build artifact.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"  # Mondays 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      start:
+        description: First local date (YYYY-MM-DD)
+        default: "2019-06-01"
+      end:
+        description: Last local date (YYYY-MM-DD)
+        default: "2019-06-30"
+
+permissions:
+  contents: read
+
+jobs:
+  canary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      START: ${{ inputs.start || '2019-06-01' }}
+      END: ${{ inputs.end || '2019-06-30' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt && pip install -e .
+      - name: Run the pipeline twice and compare table fingerprints
+        run: >
+          python -m solar_etl --db sqlite:///canary.db --report-dir canary-report
+          --log-file canary-report/run.jsonl
+          canary --start "$START" --end "$END" --raw-dir raw
+      - name: Upload quality report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-report-${{ github.run_number }}
+          path: canary-report/
+          retention-days: 30

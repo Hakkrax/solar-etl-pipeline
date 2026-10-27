@@ -1,0 +1,26 @@
+# data and databases are rebuilt by the pipeline
+data/
+raw/
+*.db
+*.db-journal
+canary-report/
+logs/
+*.jsonl
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.env

@@ -1,0 +1,42 @@
+[project]
+name = "solar-etl"
+version = "0.1.0"
+description = "Automated ETL for public solar PV monitoring data (NREL PVDAQ) joined with Open-Meteo weather"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Faheem Niyas" }]
+dependencies = [
+    "pandas>=2.2,<3",
+    "SQLAlchemy>=2.0,<2.1",
+    "requests>=2.31",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.2"]
+
+[project.scripts]
+solar-etl = "solar_etl.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = ["live: calls the real PVDAQ and Open-Meteo services (run with -m live)"]
+addopts = "-m 'not live'"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["solar_etl", "conftest"]

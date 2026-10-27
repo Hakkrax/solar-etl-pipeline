@@ -1,0 +1,77 @@
+{
+  "run": {
+    "run_id": "25714ee5fee2",
+    "started_at": "2026-10-27 12:20:33.618169",
+    "finished_at": "2026-10-27 12:20:53.018177",
+    "status": "success",
+    "window_start": "2017-01-01",
+    "window_end": "2019-12-31",
+    "systems": "1418,1419,1420",
+    "rows_upserted": "157680",
+    "error_message": null,
+    "code_version": "local"
+  },
+  "systems": [
+    {
+      "system_id": 1418,
+      "name": "Clark County NV - Desert Breeze",
+      "capacity_kw": 42.0,
+      "dc_capacity_kw": 43.68,
+      "days": 1095,
+      "days_with_energy": 781,
+      "energy_mwh": 151.1,
+      "daylight_hours": 12808,
+      "daylight_coverage_pct": 71.3,
+      "median_daily_pr": 0.805
+    },
+    {
+      "system_id": 1419,
+      "name": "Clark County NV - Hollywood Rec Center",
+      "capacity_kw": 40.0,
+      "dc_capacity_kw": 43.68,
+      "days": 1095,
+      "days_with_energy": 928,
+      "energy_mwh": 169.1,
+      "daylight_hours": 12810,
+      "daylight_coverage_pct": 86.8,
+      "median_daily_pr": 0.778
+    },
+    {
+      "system_id": 1420,
+      "name": "Clark County NV - Government Center",
+      "capacity_kw": 30.0,
+      "dc_capacity_kw": 35.84,
+      "days": 1095,
+      "days_with_energy": 1095,
+      "energy_mwh": 177.71,
+      "daylight_hours": 12802,
+      "daylight_coverage_pct": 99.9,
+      "median_daily_pr": 0.918
+    }
+  ],
+  "rules": {
+    "missing_file": 229,
+    "schema_missing_required": 236,
+    "schema_missing_optional": 616,
+    "unparseable_timestamp": 0,
+    "duplicate_timestamp": 0,
+    "dst_ambiguous": 28,
+    "dst_nonexistent": 0,
+    "missing_interval": 6019,
+    "unit_converted": 148270,
+    "non_numeric_value": 0,
+    "power_total_mismatch": 0,
+    "power_from_channels": 0,
+    "null_power": 33241,
+    "negative_power": 0,
+    "power_above_capacity": 0,
+    "implausible_power_scale": 28,
+    "irradiance_out_of_range": 0,
+    "negative_irradiance_clipped": 0,
+    "temperature_out_of_range": 0,
+    "frozen_irradiance": 0,
+    "night_power": 62202,
+    "frozen_power": 9,
+    "low_coverage_hour": 20371
+  }
+}
