@@ -2,6 +2,9 @@
 
 [![tests](https://github.com/Hakkrax/solar-etl-pipeline/actions/workflows/tests.yml/badge.svg)](https://github.com/Hakkrax/solar-etl-pipeline/actions/workflows/tests.yml)
 [![scheduled canary run](https://github.com/Hakkrax/solar-etl-pipeline/actions/workflows/canary.yml/badge.svg)](https://github.com/Hakkrax/solar-etl-pipeline/actions/workflows/canary.yml)
+![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)
+![Databases](https://img.shields.io/badge/tested%20on-SQLite%20%7C%20PostgreSQL%2016-336791)
+![Licence](https://img.shields.io/badge/licence-MIT-lightgrey)
 
 An automated Python ETL pipeline that turns messy public solar-panel monitoring
 data into a clean, trusted, hourly SQL dataset joined with weather, with a
@@ -19,6 +22,21 @@ named data-quality rule for every fix it makes.
 
 > This is **historical open data**, not a live equipment feed. No employer code
 > or data is used.
+
+## Highlights
+
+- **Real, messy data, handled on purpose.** Profiling found columns whose names lie about
+  their units (a "kW" field holding watts), a silent °F-to-°C switch on 29 March 2017,
+  daylight-saving gaps and repeats, and night-time power. Each has a named rule.
+- **23 named data-quality rules**, counted per system, day and rule, with a Markdown
+  quality report for every run. Problems are flagged, never silently dropped.
+- **Idempotent and safe to re-run.** Upserts on natural keys, one transaction per system,
+  and a weekly canary job that runs real data twice and fails if any table changes.
+- **Portable.** SQLite by default, PostgreSQL with one connection URL; CI runs both.
+- **Tested:** 63 pytest tests, including a synthetic "messy day" that injects each defect a
+  known number of times and checks every rule's exact count.
+- **Feeds a live app:** its output powers my
+  [Solar Fleet Performance Monitor](https://faheem-solar-ops.streamlit.app).
 
 ## Results: 2017-2019 backfill
 
@@ -179,3 +197,9 @@ docs/DESIGN.md     decisions and evidence
 
 MIT licence for the code. The data is downloaded at run time, is not stored in
 this repository and is not covered by the code licence.
+
+## Part of a three-project portfolio
+
+1. [Retail sales and customer analytics](https://github.com/Hakkrax/retail-bi-analytics): Python cleaning, SQL star schema and a Tableau dashboard
+2. **Solar PV ETL pipeline** (this repository)
+3. [Solar fleet performance monitor](https://github.com/Hakkrax/solar-ops-dashboard): a [live Streamlit dashboard](https://faheem-solar-ops.streamlit.app) on the pipeline's output
